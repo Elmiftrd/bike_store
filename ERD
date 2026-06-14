@@ -1,0 +1,106 @@
+@startuml
+
+entity categories {
+    category_id : int <pk>
+    category_name : varchar(255)
+}
+
+entity brands {
+    brand_id : int <pk>
+    brand_name : varchar(255)
+}
+
+entity products {
+    product_id : int <pk>
+    product_name : varchar(255)
+    brand_id : int <fk>
+    category_id : int <fk>
+    model_year : smallint
+    list_price : decimal(10,2)
+}
+
+entity customers {
+    customer_id : int <pk>
+    first_name : varchar(255)
+    last_name : varchar(255)
+    phone : varchar(25)
+    email : varchar(255)
+    street : varchar(255)
+    city : varchar(50)
+    state : varchar(25)
+    zip_code : varchar(5)
+}
+
+entity stores {
+    store_id : int <pk>
+    store_name : varchar(255)
+    phone : varchar(25)
+    email : varchar(255)
+    street : varchar(255)
+    city : varchar(255)
+    state : varchar(10)
+    zip_code : varchar(5)
+}
+
+entity staffs {
+    staff_id : int <pk>
+    first_name : varchar(50)
+    last_name : varchar(50)
+    email : varchar(255)
+    phone : varchar(25)
+    active : tinyint
+    store_id : int <fk>
+    manager_id : int <fk>
+}
+
+entity orders {
+    order_id : int <pk>
+    customer_id : int <fk>
+    order_status : tinyint
+    order_date : date
+    required_date : date
+    shipped_date : date
+    store_id : int <fk>
+    staff_id : int <fk>
+}
+
+entity order_items {
+    order_id : int <pfk>
+    item_id : int <pk>
+    product_id : int <fk>
+    quantity : int
+    list_price : decimal(10,2)
+    discount : decimal(4,2)
+}
+
+entity stocks {
+    store_id : int <pfk>
+    product_id : int <pfk>
+    quantity : int
+}
+
+'================ RELASI ================
+
+categories ||--o{ products : "mengelompokkan"
+
+brands ||--o{ products : "memproduksi"
+
+customers ||--o{ orders : "melakukan"
+
+stores ||--o{ staffs : "mempekerjakan"
+
+stores ||--o{ orders : "menerima"
+
+staffs ||--o{ orders : "memproses"
+
+orders ||--o{ order_items : "memuat"
+
+products ||--o{ order_items : "dipesan"
+
+stores ||--o{ stocks : "menyimpan"
+
+products ||--o{ stocks : "tersedia"
+
+staffs ||--o{ staffs : "mengelola"
+
+@enduml
