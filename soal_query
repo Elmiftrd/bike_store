@@ -1,0 +1,58 @@
+1. Tampilkan seluruh produk beserta nama brand dan kategori.
+select products.product_id, products.product_name, categories.category_name,brands.brand_name from products
+join categories on products.category_id=categories.category_id
+join brands on products.brand_id=brands.brand_id
+order by products.product_id;
+
+2. Hitung jumlah produk pada setiap kategori.
+select categories.category_name, count(products.product_id) as jumlah_produk from categories
+join products on categories.category_id=products.category_id
+group by categories.category_name
+
+3. Tampilkan rata-rata harga (list_price) produk untuk setiap brand.
+select brands.brand_name, avg(products.list_price) as rata2_harga from brands
+join products on brands.brand_id=products.brand_id
+group by brands.brand_name
+
+4. Cari 5 produk dengan harga paling mahal.
+select product_name,list_price from products
+order by list_price DESC
+limit 5
+
+5. Hitung jumlah pelanggan pada setiap kota (city).
+select city, count(*) as banyak_pelanggan from customers
+group by city
+order by banyak_pelanggan desc
+
+6. Tampilkan total stok setiap produk dari seluruh store.
+select products.product_name, sum(stocks.quantity) as jumlah from stocks
+join products on stocks.product_id=products.product_id
+group by products.product_name
+
+7. Cari produk yang tidak memiliki stok sama sekali.
+
+8. Hitung jumlah order yang dibuat oleh setiap customer.
+
+9. Tampilkan total pendapatan (revenue) dari setiap order.
+
+10. Hitung total penjualan (revenue) untuk setiap store.
+
+11. Tampilkan 10 produk yang paling banyak terjual berdasarkan quantity.
+
+12. Hitung total revenue untuk setiap kategori produk.
+
+13. Tampilkan customer yang belum pernah melakukan order.
+
+14. Hitung jumlah order berdasarkan status order (order_status).
+
+15. Cari staff yang menangani order terbanyak.
+
+16. Hitung total diskon yang diberikan pada setiap order.
+
+17. Tampilkan penjualan per bulan berdasarkan order_date.
+
+18. Cari brand dengan total penjualan tertinggi.
+
+19. Hitung rata-rata nilai transaksi customer.
+
+20. Tampilkan 5 customer dengan total pembelian terbesar.
